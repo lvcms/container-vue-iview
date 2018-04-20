@@ -1,0 +1,17 @@
+$screen-xs-max: 768px;
+$screen-sm-min: 768px;
+$screen-md-min: 970px;
+$screen-lg-min: 1170px;
+
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: #d3dce6;
+  }
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #99a9bf;
+    border-radius: 20px;
+  }
+}
