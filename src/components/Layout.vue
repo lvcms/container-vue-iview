@@ -2,13 +2,15 @@
   <div class="layout">
     <Layout>
         <Sider ref="side1" breakpoint="md" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
-          <layoutSidebar/>
+          <layoutSidebar
+            :menuList="sidebar"
+          />
         </Sider>
         <Layout>
             <Header :style="{padding: 0}" class="layout-header-bar">
                 <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '20px 20px 0'}" type="navicon-round" size="24"></Icon>
             </Header>
-            <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
+            <Content :style="{margin: '1vh', background: '#fff', borderRadius: '4px', minHeight: '260px'}">
                 Content
             </Content>
         </Layout>
@@ -17,13 +19,18 @@
 </template>
 <script>
   import layoutSidebar    from './Layout/Sidebar.vue'
+  import gql from 'graphql-tag'
   export default {
     name: 'cvi-layout',
     components: {
       layoutSidebar,
     },
+    created () {
+      this.initSidebar()
+    },
     data () {
       return {
+          sidebar: [],
           isCollapsed: false
       }
     },
@@ -38,6 +45,21 @@
     methods: {
         collapsedSider () {
             this.$refs.side1.toggleCollapse();
+        },
+        initSidebar () {
+          Cache.remember(this.$config.model + ':sidebar', async () => {
+            let apollo = await this.$apollo.query({
+              query: gql`query ($model: String!) {
+                sidebar(model: $model)
+              }`,
+              variables: {
+                model: this.$config.model
+              }
+            })
+            return apollo.data.sidebar
+          } , 60*24*7).then((sidebar) => {
+            this.sidebar = sidebar
+          })
         }
     }
   }

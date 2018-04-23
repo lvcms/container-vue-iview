@@ -1,155 +1,48 @@
 <template>
-      <Menu active-name="1-2" theme="dark" width="auto"  :class="menuitemClasses" :open-names="['1']">
-        <Submenu name="1">
-            <template slot="title">
-                <Icon type="ios-navigate"></Icon>
-                <span>Item 1</span>
-            </template>
-            <MenuItem name="1-1">Option 1</MenuItem>
-            <MenuItem name="1-2">Option 2</MenuItem>
-            <MenuItem name="1-3">Option 3</MenuItem>
-        </Submenu>
-        <Submenu name="2">
-            <template slot="title">
-                <Icon type="ios-keypad"></Icon>
-                <span>Item 2</span>
-            </template>
-            <MenuItem name="2-1">Option 1</MenuItem>
-            <MenuItem name="2-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
+    <Menu active-name="1-2" theme="dark" width="auto"  :class="menuitemClasses" :open-names="['1']">
+        <template v-for="item in menuList">
+            <!-- <MenuItem v-if="item.children.length<=1" :name="item.children[0].name" :key="'menuitem' + item.name">
+                <Icon :type="item.children[0].icon || item.icon" :size="iconSize" :key="'menuicon' + item.name"></Icon>
+                <span class="layout-text" :key="'title' + item.name">123</span>
+            </MenuItem> -->
 
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu><Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
-        <Submenu name="3">
-            <template slot="title">
-                <Icon type="ios-analytics"></Icon>
-                <span>Item 3</span>
-            </template>
-            <MenuItem name="3-1">Option 1</MenuItem>
-            <MenuItem name="3-2">Option 2</MenuItem>
-        </Submenu>
+            <Submenu v-if="item.children" :name="item.name" :key="item.name">
+                <template slot="title">
+                    <Icon v-if="item.icon" :type="item.icon"></Icon>
+                    <span class="layout-text">{{item.title}}</span>
+                </template>
+                <template v-for="child in item.children">
+                    <MenuItem :name="child.name" :key="'menuitem' + child.name">
+                        <Icon v-if="child.icon" :type="child.icon"  :key="'icon' + child.name"></Icon>
+                        <span class="layout-text" :key="'title' + child.name">{{child.title}}</span>
+                    </MenuItem>
+                </template>
+            </Submenu>
+        </template>
     </Menu>
 </template>
 <script>
   export default {
     name: 'cvi-sidebar',
+    props: {
+      menuList: {
+          type: Array,
+          default: ''
+      }
+    },
+    watch: {
+      'menuList' (to) {
+        console.log(this.menuList);
+      }
+    },
+    computed: {
+        menuitemClasses () {
+            return [
+                'menu-item',
+                this.isCollapsed ? 'collapsed-menu' : ''
+            ]
+        }
+    }
   }
 </script>
 <style scoped>
