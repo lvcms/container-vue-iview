@@ -1,7 +1,6 @@
 <template>
 <div class="login-body">
   <div class="login-item">
-    0321111
     <router-view></router-view>
   </div>
 </div>
