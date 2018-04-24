@@ -24,7 +24,7 @@
               </Breadcrumb>
             </Header>
             <Content :style="{margin: '1vh', background: '#fff', borderRadius: '4px', minHeight: '260px'}">
-                Content
+                <layoutContent/>
             </Content>
         </Layout>
     </Layout>
@@ -32,11 +32,13 @@
 </template>
 <script>
   import layoutSidebar    from './Layout/Sidebar.vue'
+  import layoutContent    from './Layout/Content.vue'
   import gql from 'graphql-tag'
   export default {
     name: 'cvi-layout',
     components: {
       layoutSidebar,
+      layoutContent,
     },
     created () {
       this.initSidebar()
