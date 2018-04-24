@@ -4,6 +4,7 @@
         <Sider ref="side1" breakpoint="md" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
           <layoutSidebar
             :menuList="sidebar"
+            :isCollapsed="isCollapsed"
           />
         </Sider>
         <Layout>

@@ -1,20 +1,19 @@
 <template>
     <Menu active-name="1-2" theme="dark" width="auto"  :class="menuitemClasses" :open-names="['1']">
         <template v-for="item in menuList">
-            <!-- <MenuItem v-if="item.children.length<=1" :name="item.children[0].name" :key="'menuitem' + item.name">
-                <Icon :type="item.children[0].icon || item.icon" :size="iconSize" :key="'menuicon' + item.name"></Icon>
-                <span class="layout-text" :key="'title' + item.name">123</span>
-            </MenuItem> -->
-
+            <MenuItem v-if="!item.children" :name="item.name" :key="'menuitem' + item.name">
+                <i :class="item.icon"></i>
+                <span :key="'title' + item.name">{{item.title}}</span>
+            </MenuItem>
             <Submenu v-if="item.children" :name="item.name" :key="item.name">
                 <template slot="title">
-                    <Icon v-if="item.icon" :type="item.icon"></Icon>
-                    <span class="layout-text">{{item.title}}</span>
+                    <i :class="item.icon"></i>
+                    <span>{{item.title}}</span>
                 </template>
                 <template v-for="child in item.children">
                     <MenuItem :name="child.name" :key="'menuitem' + child.name">
-                        <Icon v-if="child.icon" :type="child.icon"  :key="'icon' + child.name"></Icon>
-                        <span class="layout-text" :key="'title' + child.name">{{child.title}}</span>
+                        <i :class="child.icon"></i>
+                        <span :key="'title' + child.name">{{child.title}}</span>
                     </MenuItem>
                 </template>
             </Submenu>
@@ -28,6 +27,10 @@
       menuList: {
           type: Array,
           default: ''
+      },
+      isCollapsed: {
+          type: Boolean,
+          default: false
       }
     },
     computed: {
