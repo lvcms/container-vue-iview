@@ -11,6 +11,17 @@
         <Layout>
             <Header :style="{padding: 0}" class="layout-header-bar">
                 <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '20px 20px 0'}" type="navicon-round" size="24"></Icon>
+                <Breadcrumb>
+                  <BreadcrumbItem to="/">
+                      <Icon type="ios-home-outline"></Icon> Home
+                  </BreadcrumbItem>
+                  <BreadcrumbItem to="/components/breadcrumb">
+                      <Icon type="social-buffer-outline"></Icon> Components
+                  </BreadcrumbItem>
+                  <BreadcrumbItem>
+                      <Icon type="pound"></Icon> Breadcrumb
+                  </BreadcrumbItem>
+              </Breadcrumb>
             </Header>
             <Content :style="{margin: '1vh', background: '#fff', borderRadius: '4px', minHeight: '260px'}">
                 Content
@@ -89,6 +100,8 @@
     .layout-header-bar{
         background: #fff;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
+        display: -webkit-flex; /* Safari */
+        display: flex;
     }
     .layout-logo-left{
         width: 90%;
