@@ -5,6 +5,7 @@
           <layoutSidebar
             :menuList="sidebar"
             :isCollapsed="isCollapsed"
+            @on-change="handleChange"
           />
         </Sider>
         <Layout>
@@ -66,6 +67,11 @@
           } , 60*24*7).then((sidebar) => {
             this.sidebar = sidebar
           })
+        },
+        handleChange (name) {
+          this.$router.push({
+              name: name
+          });
         }
     }
   }

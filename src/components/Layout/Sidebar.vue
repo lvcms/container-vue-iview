@@ -1,11 +1,11 @@
 <template>
-    <Menu active-name="1-2" theme="dark" width="auto"  :class="menuitemClasses" :open-names="['1']">
+    <Menu theme="dark" width="auto"  :class="menuitemClasses" @on-select="changeMenu">
         <template v-for="item in menuList">
             <MenuItem v-if="!item.children" :name="item.name" :key="'menuitem' + item.name">
                 <i :class="item.icon"></i>
                 <span :key="'title' + item.name">{{item.title}}</span>
             </MenuItem>
-            <Submenu v-if="item.children" :name="item.name" :key="item.name">
+            <Submenu v-if="item.children" :name="'submenu' +item.name" :key="item.name">
                 <template slot="title">
                     <i :class="item.icon"></i>
                     <span>{{item.title}}</span>
@@ -40,6 +40,11 @@
                 this.isCollapsed ? 'collapsed-menu' : ''
             ]
         }
+    },
+    methods: {
+      changeMenu (active) {
+          this.$emit('on-change', active);
+      }
     }
   }
 </script>
