@@ -30,11 +30,6 @@
           default: ''
       }
     },
-    watch: {
-      'menuList' (to) {
-        console.log(this.menuList);
-      }
-    },
     computed: {
         menuitemClasses () {
             return [

@@ -50,7 +50,12 @@
           Cache.remember(this.$config.model + ':sidebar', async () => {
             let apollo = await this.$apollo.query({
               query: gql`query ($model: String!) {
-                sidebar(model: $model)
+                sidebar(model: $model){
+                  title
+                  name
+                  icon
+                  children
+                }
               }`,
               variables: {
                 model: this.$config.model
