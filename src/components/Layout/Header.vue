@@ -33,6 +33,7 @@
   }
 </script>
 <style lang="scss" scoped>
+  @import  './../../assets/sass/mixin.scss';
   .layout-header-bar{
       padding: 0;
       background: #fff;
@@ -47,7 +48,10 @@
   .rotate-icon{
       transform: rotate(-90deg);
   }
-  .breadcrumb{
-    display: none;
+  @media (max-width: $md) {
+    /* 屏幕小的时候自动隐藏 breadcrumb */
+    .breadcrumb{
+      display: none;
+    }
   }
 </style>

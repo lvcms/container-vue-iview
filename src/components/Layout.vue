@@ -7,16 +7,6 @@
             :isCollapsed="isCollapsed"
             @on-change="handleChange"
           />
-          <layoutSidebar
-            :menuList="sidebar"
-            :isCollapsed="isCollapsed"
-            @on-change="handleChange"
-          />
-          <layoutSidebar
-            :menuList="sidebar"
-            :isCollapsed="isCollapsed"
-            @on-change="handleChange"
-          />
         </Sider>
         <Layout>
             <layoutHeader
