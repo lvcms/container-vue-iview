@@ -1,7 +1,17 @@
 <template>
   <div class="layout">
     <Layout>
-        <Sider ref="side1" breakpoint="md" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
+        <Sider ref="side" breakpoint="md" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
+          <layoutSidebar
+            :menuList="sidebar"
+            :isCollapsed="isCollapsed"
+            @on-change="handleChange"
+          />
+          <layoutSidebar
+            :menuList="sidebar"
+            :isCollapsed="isCollapsed"
+            @on-change="handleChange"
+          />
           <layoutSidebar
             :menuList="sidebar"
             :isCollapsed="isCollapsed"
@@ -9,35 +19,25 @@
           />
         </Sider>
         <Layout>
-            <Header :style="{padding: 0}" class="layout-header-bar">
-                <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '20px 20px 0'}" type="navicon-round" size="24"></Icon>
-                <Breadcrumb>
-                  <BreadcrumbItem to="/">
-                      <Icon type="ios-home-outline"></Icon> Home
-                  </BreadcrumbItem>
-                  <BreadcrumbItem to="/components/breadcrumb">
-                      <Icon type="social-buffer-outline"></Icon> Components
-                  </BreadcrumbItem>
-                  <BreadcrumbItem>
-                      <Icon type="pound"></Icon> Breadcrumb
-                  </BreadcrumbItem>
-              </Breadcrumb>
-            </Header>
-            <Content :style="{margin: '1vh', background: '#fff', borderRadius: '4px', minHeight: '260px'}">
-                <layoutContent/>
-            </Content>
+            <layoutHeader
+              :isCollapsed="isCollapsed"
+              @on-collapsed-sider="collapsedSider"
+            />
+            <layoutContent/>
         </Layout>
     </Layout>
   </div>
 </template>
 <script>
   import layoutSidebar    from './Layout/Sidebar.vue'
+  import layoutHeader    from './Layout/Header.vue'
   import layoutContent    from './Layout/Content.vue'
   import gql from 'graphql-tag'
   export default {
     name: 'cvi-layout',
     components: {
       layoutSidebar,
+      layoutHeader,
       layoutContent,
     },
     created () {
@@ -49,17 +49,9 @@
           isCollapsed: false
       }
     },
-    computed: {
-      rotateIcon () {
-          return [
-              'menu-icon',
-              this.isCollapsed ? 'rotate-icon' : ''
-          ];
-      }
-    },
     methods: {
         collapsedSider () {
-            this.$refs.side1.toggleCollapse();
+            this.$refs.side.toggleCollapse();
         },
         initSidebar () {
           Cache.remember(this.$config.model + ':sidebar', async () => {
@@ -89,7 +81,8 @@
     }
   }
 </script>
-<style scoped>
+<style lang="scss" scoped>
+    @import  './../assets/sass/mixin.scss';
     .layout{
         background: #f5f7f9;
         position: relative;
@@ -99,12 +92,6 @@
     .ivu-layout{
         height: 100%;
     }
-    .layout-header-bar{
-        background: #fff;
-        box-shadow: 0 1px 1px rgba(0,0,0,.1);
-        display: -webkit-flex; /* Safari */
-        display: flex;
-    }
     .layout-logo-left{
         width: 90%;
         height: 30px;
@@ -112,39 +99,9 @@
         border-radius: 3px;
         margin: 15px auto;
     }
-    .menu-icon{
-        transition: all .3s;
-    }
-    .rotate-icon{
-        transform: rotate(-90deg);
-    }
-    .menu-item span{
-        display: inline-block;
-        overflow: hidden;
-        width: 69px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        vertical-align: bottom;
-        transition: width .2s ease .2s;
-    }
-    .menu-item i{
-        transform: translateX(0px);
-        transition: font-size .2s ease, transform .2s ease;
-        vertical-align: middle;
-        font-size: 16px;
-    }
-    .collapsed-menu span{
-        width: 0px;
-        transition: width .2s ease;
-    }
-    .collapsed-menu i{
-        transform: translateX(5px);
-        transition: font-size .2s ease .2s, transform .2s ease .2s;
-        vertical-align: middle;
-        font-size: 22px;
-    }
     /* 自定义样式 */
     .ivu-layout-sider{
       overflow:auto;
+      @include scrollBar;//修复 win 侧栏样式
     }
 </style>

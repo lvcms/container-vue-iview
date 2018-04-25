@@ -1,8 +1,7 @@
 <template>
-<div class="layout-content">
-  layout-content
-  <router-view></router-view>
-</div>
+  <Content>
+    <router-view></router-view>
+  </Content>
 </template>
 <script>
   export default {
@@ -10,7 +9,4 @@
   }
 </script>
 <style lang="scss" scoped>
-  .layout-content{
-    flex: 1 0 auto;
-  }
 </style>
