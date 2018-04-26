@@ -48,7 +48,13 @@
     }
   }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+  i{
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px!important;
+  }
   .menu-item span{
       display: inline-block;
       overflow: hidden;
@@ -63,6 +69,39 @@
       transition: font-size .2s ease, transform .2s ease;
       vertical-align: middle;
       font-size: 16px;
+  }
+  .ivu-layout-sider{
+    overflow: visible!important;
+  }
+  .collapsed-menu {
+
+    .ivu-menu-submenu-title-icon{
+      display: none;
+    }
+    .ivu-menu-submenu{
+      &:hover{
+        ul{
+          margin-top: -73px;
+          display: block!important;
+        }
+      }
+    }
+    >.ivu-menu-submenu ul{
+       display: none;
+       position: absolute;
+       width: 200px;
+       margin-left: 78px;
+       background: #1c2438;
+       border-top-right-radius: 4px;
+       border-bottom-right-radius: 4px;
+       overflow: hidden;
+       >li{
+         >span{
+           margin-left: 7px;
+           overflow: visible;
+         }
+       }
+    }
   }
   .collapsed-menu span{
       width: 0px;
