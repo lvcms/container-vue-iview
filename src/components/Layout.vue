@@ -22,6 +22,8 @@
   import layoutSidebar    from './Layout/Sidebar.vue'
   import layoutHeader    from './Layout/Header.vue'
   import layoutContent    from './Layout/Content.vue'
+
+  import Cache from 'lf-cache'
   import gql from 'graphql-tag'
   export default {
     name: 'cvi-layout',
