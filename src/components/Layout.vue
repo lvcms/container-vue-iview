@@ -44,10 +44,10 @@
             this.$refs.side.toggleCollapse();
         },
         initSidebar () {
-          Cache.remember(this.$config.model + ':sidebar', async () => {
+          Cache.remember(this.$config.package + ':sidebar', async () => {
             let apollo = await this.$apollo.query({
-              query: gql`query ($model: String!) {
-                sidebar(model: $model){
+              query: gql`query ($package: String!) {
+                sidebar(package: $package){
                   title
                   name
                   icon
@@ -55,7 +55,7 @@
                 }
               }`,
               variables: {
-                model: this.$config.model
+                package: this.$config.package
               }
             })
             return apollo.data.sidebar
