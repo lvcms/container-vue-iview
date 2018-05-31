@@ -2,14 +2,17 @@
   <Header class="layout-header-bar">
       <Icon @click.native="collapsedSider" :class="rotateIcon" type="navicon-round" size="24"></Icon>
       <layoutBreadcrumb class="breadcrumb"/>
+      <layoutAvator/>
   </Header>
 </template>
 <script>
   import layoutBreadcrumb    from './Breadcrumb.vue'
+  import layoutAvator    from './Avator.vue'
   export default {
     name: 'cvi-header',
     components: {
       layoutBreadcrumb,
+      layoutAvator,
     },
     props: {
       isCollapsed: {
