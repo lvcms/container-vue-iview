@@ -74,7 +74,6 @@
     overflow: visible!important;
   }
   .collapsed-menu {
-
     .ivu-menu-submenu-title-icon{
       display: none;
     }
