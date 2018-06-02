@@ -52,7 +52,7 @@
                 let num = Math.ceil(Math.random()*27)
                 loginBody.style.backgroundImage="url(/vendor/admin/background/"+ num +".jpg)"
               }else{
-                // 防止不断检测 找不到 loginBody 就不更改
+                // 防止不断检测 找不到 loginBody
                 clearInterval(outTime)
               }
           }
