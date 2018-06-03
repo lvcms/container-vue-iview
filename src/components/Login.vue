@@ -62,6 +62,7 @@
       // console.log('aaa');
     },
     mounted() {
+      this.checkLogin()
       this.backgroundImage()
     }
   }
