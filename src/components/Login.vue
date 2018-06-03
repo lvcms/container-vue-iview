@@ -22,14 +22,14 @@
       /**
        * 处理登录
        */
-      handleLogin() {
+      async handleLogin() {
         let status = this.callbackData.data.updateModel.status
         let value = this.callbackData.data.updateModel.value
         if (value) {
-          Cache.forever('system:token',value.token)
-          Cache.forever('system:user',value.user)
-          Cache.forever('system:redirect',value.redirect)
-          this.checkLogin()
+          await Cache.forever('system:token',value.token)
+          await Cache.forever('system:user',value.user)
+          await Cache.forever('system:redirect',value.redirect)
+          await this.checkLogin()
         }
       },
       /**
