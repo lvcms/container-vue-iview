@@ -33,7 +33,7 @@
         }
       },
       /**
-       * 检测登录
+       * 检测登录 如果登录跳转
        */
       async checkLogin(){
         if (localStorage.getItem('system:token')) {
