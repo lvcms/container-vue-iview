@@ -26,7 +26,7 @@
         let status = this.callbackData.data.updateModel.status
         let value = this.callbackData.data.updateModel.value
         if (value) {
-          await Cache.forever('system:token',value.token)
+          localStorage.setItem('system:token',value.token)
           await Cache.forever('system:user',value.user)
           await Cache.forever('system:redirect',value.redirect)
           await this.checkLogin()
@@ -36,8 +36,7 @@
        * 检测登录
        */
       async checkLogin(){
-        if (await Cache.has('system:token')) {
-          let token = await Cache.get('system:token')
+        if (localStorage.getItem('system:token')) {
           let redirect = await Cache.get('system:redirect')
           this.$router.push(redirect)
         }else {
