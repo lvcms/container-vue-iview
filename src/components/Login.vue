@@ -67,6 +67,9 @@
       // console.log('aaa');
     },
     mounted() {
+      this.$event.$on('bigrocs', result => {
+        console.log(`Oh, that's nice. It's gotten ${result} clicks! :)`)
+      });
       this.checkLogin()
       this.backgroundImage()
     }
