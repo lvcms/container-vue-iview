@@ -10,6 +10,11 @@
   import Cache from 'lf-cache'
   export default {
     name: 'cvi-login',
+    data () {
+      return {
+          redirect: '/',
+      }
+    },
     computed: {
       ...mapState({
         callbackData: state => state.callbackData,
@@ -22,22 +27,22 @@
       /**
        * 处理登录
        */
-      async handleLogin() {
+      handleLogin() {
         let status = this.callbackData.data.updateModel.status
         let value = this.callbackData.data.updateModel.value
         if (value) {
+          Cache.forever('system:user',value.user)
           localStorage.setItem('system:token',value.token)
-          await Cache.forever('system:user',value.user)
-          await Cache.forever('system:redirect',value.redirect)
-          await this.checkLogin()
+          localStorage.setItem('system:redirect',value.redirect)
+          this.checkLogin()
         }
       },
       /**
        * 检测登录 如果登录跳转
        */
-      async checkLogin(){
+      checkLogin(){
         if (localStorage.getItem('system:token')) {
-          let redirect = await Cache.get('system:redirect')
+          let redirect = localStorage.getItem('system:redirect')
           this.$router.push(redirect)
         }else {
           console.log('没有找到 token 请检查');
