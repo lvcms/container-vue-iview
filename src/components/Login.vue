@@ -33,7 +33,7 @@
         if (value) {
           Cache.forever('system:user',value.user)
           localStorage.setItem('system:token',value.token)
-          localStorage.setItem('system:redirect',value.redirect)
+          localStorage.setItem('system:admin:redirect',value.redirect)
           this.checkLogin()
         }
       },
@@ -42,7 +42,7 @@
        */
       checkLogin(){
         if (localStorage.getItem('system:token')) {
-          let redirect = localStorage.getItem('system:redirect')
+          let redirect = localStorage.getItem('system:admin:redirect')
           this.$router.push(redirect)
         }else {
           console.log('没有找到 token 请检查');
