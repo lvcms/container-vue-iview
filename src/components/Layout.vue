@@ -63,6 +63,9 @@
             return apollo.data.sidebar
           } , 60*24*7).then((sidebar) => {
             this.sidebar = sidebar
+            this.$event.$emit('package-sidebar-catch', sidebar);
+          }).catch((error) => {
+            this.$event.$emit('package-sidebar-catch', error);
           })
         },
         handleChange (name) {
