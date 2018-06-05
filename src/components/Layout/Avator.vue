@@ -10,7 +10,7 @@
                   <DropdownMenu slot="list">
                       <DropdownItem name="cache">清除缓存</DropdownItem>
                       <DropdownItem name="ownSpace">个人中心</DropdownItem>
-                      <DropdownItem name="loginout" divided>退出登录</DropdownItem>
+                      <DropdownItem name="loginOut" divided>退出登录</DropdownItem>
                   </DropdownMenu>
               </Dropdown>
               <Avatar style="background: #619fe7;margin-left: 10px;"></Avatar>
@@ -29,13 +29,10 @@
               // this.$router.push({
               //     name: 'ownspace_index'
               // });
-          } else if (name === 'loginout') {
-              // // 退出登录
-              // this.$store.commit('logout', this);
-              // this.$store.commit('clearOpenedSubmenu');
-              // this.$router.push({
-              //     name: 'login'
-              // });
+          } else if (name === 'loginOut') {
+            localStorage.removeItem('system:token')
+            this.$router.push('/admin/login')
+            this.$event.$emit('login-out','loginOut');
           } else if (name === 'cache') {
               // 清除前端缓存
               Cache.flush()

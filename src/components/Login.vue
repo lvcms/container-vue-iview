@@ -14,6 +14,17 @@
           redirect: '/',
       }
     },
+    created() {
+      this.eventOn()
+    },
+    mounted() {
+      this.checkLogin()
+      this.backgroundImage()
+    },
+    beforeDestroy() {
+      this.$event.$off('form-submit-then')
+      this.$event.$off('form-submit-catch')
+    },
     methods: {
       /**
        * [eventOn 事件监听]
@@ -24,6 +35,7 @@
             this.handleLogin(result.data.updateModel.value)
           });
           this.$event.$on('form-submit-catch', error => {
+            this.$Message.error(error.message.replace(/GraphQL error:/, ""))
             console.error(error)
           });
       },
@@ -46,6 +58,7 @@
           let redirect = localStorage.getItem('system:admin:redirect')
           this.$router.push(redirect)
         }else {
+          this.$router.push('/admin/login')
           console.log('没有找到 token 请检查');
         }
       },
@@ -61,16 +74,9 @@
                 clearInterval(outTime)
               }
           }
+
           backgroundImage()
       }
-    },
-    created() {
-      // console.log('aaa');
-    },
-    mounted() {
-      this.eventOn()
-      this.checkLogin()
-      this.backgroundImage()
     }
   }
 </script>
