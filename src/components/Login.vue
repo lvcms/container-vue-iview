@@ -6,7 +6,6 @@
 </div>
 </template>
 <script>
-  import { mapState } from 'vuex'
   import Cache from 'lf-cache'
   export default {
     name: 'cvi-login',
@@ -15,21 +14,23 @@
           redirect: '/',
       }
     },
-    computed: {
-      ...mapState({
-        callbackData: state => state.callbackData,
-      })
-    },
-    watch: {
-      callbackData:'handleLogin'
-    },
     methods: {
+      /**
+       * [eventOn 事件监听]
+       * @return {[type]} [description]
+       */
+      eventOn() {
+          this.$event.$on('form-submit-then', result => {
+            this.handleLogin(result.data.updateModel.value)
+          });
+          this.$event.$on('form-submit-catch', error => {
+            console.error(error)
+          });
+      },
       /**
        * 处理登录
        */
-      handleLogin() {
-        let status = this.callbackData.data.updateModel.status
-        let value = this.callbackData.data.updateModel.value
+      handleLogin(value) {
         if (value) {
           Cache.forever('system:user',value.user)
           localStorage.setItem('system:token',value.token)
@@ -67,9 +68,7 @@
       // console.log('aaa');
     },
     mounted() {
-      this.$event.$on('bigrocs', result => {
-        console.log(`Oh, that's nice. It's gotten ${result} clicks! :)`)
-      });
+      this.eventOn()
       this.checkLogin()
       this.backgroundImage()
     }
