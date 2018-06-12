@@ -23,6 +23,7 @@
   import layoutHeader    from './Layout/Header.vue'
   import layoutContent    from './Layout/Content.vue'
 
+  import { mapActions } from 'vuex'
   import Cache from 'lf-cache'
   import gql from 'graphql-tag'
   export default {
@@ -42,6 +43,9 @@
       }
     },
     methods: {
+        ...mapActions([
+          'graphqlError',
+        ]),
         collapsedSider () {
             this.$refs.side.toggleCollapse();
         },
@@ -65,6 +69,10 @@
             this.sidebar = sidebar
             this.$event.$emit('package-sidebar-then', sidebar);
           }).catch((error) => {
+            this.graphqlError(error.message).then( message => {
+              this.$Message.error(message)
+            })
+            console.error(error);
             this.$event.$emit('package-sidebar-catch', error);
           })
         },
