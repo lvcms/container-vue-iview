@@ -34,10 +34,6 @@
           this.$event.$on('form-submit-then', result => {
             this.handleLogin(result.data.updateModel.value)
           });
-          this.$event.$on('form-submit-catch', error => {
-            this.$Message.error(error.message.replace(/GraphQL error:/, ""))
-            console.error(error)
-          });
       },
       /**
        * 处理登录
