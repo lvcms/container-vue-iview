@@ -1,20 +1,20 @@
 <template>
     <Menu theme="dark" width="auto"  :class="menuitemClasses" @on-select="changeMenu">
         <template v-for="item in menuList">
-            <MenuItem v-if="!item.children" :name="item.name" :key="'menuitem' + item.name">
+            <menu-item v-if="!item.children" :name="item.name" :key="'menuitem' + item.name">
                 <i :class="item.icon"></i>
                 <span :key="'title' + item.name">{{item.title}}</span>
-            </MenuItem>
+            </menu-item>
             <Submenu v-if="item.children" :name="'submenu' +item.name" :key="item.name">
                 <template slot="title">
                     <i :class="item.icon"></i>
                     <span>{{item.title}}</span>
                 </template>
                 <template v-for="child in item.children">
-                    <MenuItem :name="child.name" :key="'menuitem' + child.name">
+                    <menu-item :name="child.name" :key="'menuitem' + child.name">
                         <i :class="child.icon"></i>
                         <span :key="'title' + child.name">{{child.title}}</span>
-                    </MenuItem>
+                    </menu-item>
                 </template>
             </Submenu>
         </template>
