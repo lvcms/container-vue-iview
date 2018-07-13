@@ -9,11 +9,6 @@
   import Cache from 'lf-cache'
   export default {
     name: 'cvi-login',
-    data () {
-      return {
-          redirect: '/',
-      }
-    },
     created() {
       this.eventOn()
     },
