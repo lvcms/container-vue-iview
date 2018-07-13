@@ -42,7 +42,7 @@
         if (value) {
           Cache.forever('system:user',value.user)
           localStorage.setItem('system:token',value.token)
-          localStorage.setItem('system:admin:redirect',value.redirect)
+          localStorage.setItem('system:login:redirect',value.redirect)
           this.checkLogin()
         }
       },
@@ -51,15 +51,16 @@
        */
       checkLogin(){
         if (localStorage.getItem('system:token')) {
-          let redirect = localStorage.getItem('system:admin:redirect')
+          let redirect = localStorage.getItem('system:login:redirect')
           this.$router.push(redirect)
         }else {
-          this.$router.push('/admin/login')
-          console.log('没有找到 token 请检查');
+          this.$store.dispatch('login')
         }
       },
+      /**
+       * 背景图片自动更换
+       */
       backgroundImage() {
-          let outTime = setInterval(backgroundImage,10000)
           let backgroundImage = () =>{
               let loginBody = document.getElementById("loginBody")
               if (loginBody) {
@@ -70,8 +71,8 @@
                 clearInterval(outTime)
               }
           }
-
           backgroundImage()
+          let outTime = setInterval(backgroundImage,10000)
       }
     }
   }
