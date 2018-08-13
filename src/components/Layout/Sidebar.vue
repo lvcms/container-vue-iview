@@ -1,11 +1,11 @@
 <template>
-    <Menu theme="dark" width="auto"  :class="menuitemClasses" @on-select="changeMenu">
-        <template v-for="item in menuList">
+    <Menu theme="dark" width="auto"  :class="menuitemClasses" @on-select="changeMenu" accordion>
+        <template v-for="(item,index) in menuList">
             <menu-item v-if="!item.children" :name="item.name" :key="'menuitem' + item.name">
                 <i :class="item.icon"></i>
                 <span :key="'title' + item.name">{{item.title}}</span>
             </menu-item>
-            <Submenu v-if="item.children" :name="'submenu' +item.name" :key="item.name">
+            <Submenu v-if="item.children" :name="'submenu'+index" :key="'submenu'+index">
                 <template slot="title">
                     <i :class="item.icon"></i>
                     <span>{{item.title}}</span>
