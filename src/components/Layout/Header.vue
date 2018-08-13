@@ -1,6 +1,6 @@
 <template>
   <Header class="layout-header-bar">
-      <Icon @click.native="collapsedSider" :class="rotateIcon" type="navicon-round" size="24"></Icon>
+      <Icon @click.native="collapsedSider" :class="rotateIcon" type="md-menu" size="24"></Icon>
       <layoutBreadcrumb class="breadcrumb"/>
       <layoutAvator/>
   </Header>
