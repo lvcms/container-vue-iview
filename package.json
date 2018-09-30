@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/laracore/container-vue-iview.git"
+    "url": "git+https://github.com/lvcms/container-vue-iview.git"
   },
   "keywords": [
     "vue",
@@ -18,7 +18,7 @@
   "author": "bigRcos",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/laracore/container-vue-iview/issues"
+    "url": "https://github.com/lvcms/container-vue-iview/issues"
   },
-  "homepage": "https://github.com/laracore/container-vue-iview#readme"
+  "homepage": "https://github.com/lvcms/container-vue-iview#readme"
 }
