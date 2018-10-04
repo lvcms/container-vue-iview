@@ -11,7 +11,8 @@
     "json-vue-core": "~1.0"
   },
   "devDependencies": {
-    "node-sass": "~4.9"
+    "node-sass": "~4.9",
+    "sass-loader": "~7.1",
   },
   "repository": {
     "type": "git",
