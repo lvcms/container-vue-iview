@@ -1,5 +1,5 @@
 import Layout from './components/Layout.vue'
-import Login from './components/login.vue'
+import Login from './components/Login.vue'
 import Vue from 'vue'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
@@ -10,7 +10,7 @@ const components = [
   Login
 ]
 
-const install = () =>{
+const install = function (Vue, opts = {}) {
   components.map(component => {
     Vue.component(component.name, component)
   })
