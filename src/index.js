@@ -10,7 +10,7 @@ const components = [
   Login
 ]
 
-const install = function (Vue, opts = {}) {
+const install = () =>{
   components.map(component => {
     Vue.component(component.name, component)
   })
