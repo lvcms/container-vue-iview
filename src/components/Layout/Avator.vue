@@ -46,7 +46,6 @@
     position: absolute;
     right: 0;
     top: 0;
-    height: 100%;
     padding-right: 1vh;
   }
 </style>

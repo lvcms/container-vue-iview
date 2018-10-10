@@ -8,7 +8,7 @@
             @on-change="handleChange"
           />
         </Sider>
-        <Layout>
+        <Layout class="layout-left">
             <layoutHeader
               :isCollapsed="isCollapsed"
               @on-collapsed-sider="collapsedSider"
@@ -88,12 +88,14 @@
     @import  './../assets/sass/mixin.scss';
     .layout{
         background: #f5f7f9;
-        position: relative;
         overflow: hidden;
         height: 100%;
     }
     .ivu-layout{
         height: 100%;
+    }
+    .layout-left{
+        overflow-x:hidden!important;
     }
     .layout-logo-left{
         width: 90%;
