@@ -30,14 +30,17 @@
               //     name: 'ownspace_index'
               // });
           } else if (name === 'loginOut') {
-            localStorage.removeItem('system:token')
-            this.$router.push('/admin/login')
-            this.$event.$emit('login-out','loginOut');
+            this.$store.dispatch('loginOut')
+
           } else if (name === 'cache') {
               // 清除前端缓存
               Cache.flush()
           }
       },
+    },
+    created() {
+    //   console.log(this.$store);
+
     }
   }
 </script>

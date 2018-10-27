@@ -1,3 +1,5 @@
+import store from './store'
+
 import Layout from './components/Layout.vue'
 import Login from './components/Login.vue'
 import Vue from 'vue'
@@ -15,5 +17,7 @@ const install = function (Vue, opts = {}) {
     Vue.component(component.name, component)
   })
 }
+// 加载 vuex 配置
+install.store = store
 
 export default install
