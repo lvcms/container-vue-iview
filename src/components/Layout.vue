@@ -44,7 +44,8 @@
     },
     methods: {
         ...mapActions([
-          'graphqlError',
+            'eventSidebar',
+            'graphqlError',
         ]),
         collapsedSider () {
             this.$refs.side.toggleCollapse();
@@ -67,13 +68,11 @@
             return apollo.data.sidebar
           } , 60*24*7).then((sidebar) => {
             this.sidebar = sidebar
-            this.$event.$emit('package-sidebar-then', sidebar);
+            this.eventSidebar(sidebar)
           }).catch((error) => {
-            this.graphqlError(error.message).then( message => {
+            this.graphqlError(error).then( message => {
               this.$Message.error(message)
             })
-            console.error(error);
-            this.$event.$emit('package-sidebar-catch', error);
           })
         },
         handleChange (name) {

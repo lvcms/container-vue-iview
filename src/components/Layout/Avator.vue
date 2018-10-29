@@ -31,7 +31,6 @@
               // });
           } else if (name === 'loginOut') {
             this.$store.dispatch('loginOut')
-
           } else if (name === 'cache') {
               // 清除前端缓存
               Cache.flush()

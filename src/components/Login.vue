@@ -7,6 +7,8 @@
 </template>
 <script>
   import Cache from 'lf-cache'
+  import { mapState, mapActions } from 'vuex'
+
   export default {
     name: 'cvi-login',
     data () {
@@ -16,30 +18,32 @@
       }
     },
     created() {
-      this.eventOn()
+
+    },
+    computed: {
+        ...mapState({
+            formSubmit: state => state.formSubmit,
+        })
     },
     mounted() {
       this.checkLogin()
       this.backgroundImage()
     },
-    beforeDestroy() {
-      this.$event.$off('form-submit-then')
-      this.$event.$off('form-submit-catch')
+    watch: {
+        formSubmit: {
+            handler: 'handleLogin',
+            deep: true
+        },
     },
     methods: {
-      /**
-       * [eventOn 事件监听]
-       * @return {[type]} [description]
-       */
-      eventOn() {
-          this.$event.$on('form-submit-then', result => {
-            this.handleLogin(result.data.updateModel.value)
-          });
-      },
+        ...mapActions([
+            'login',
+        ]),
       /**
        * 处理登录
        */
-      handleLogin(value) {
+      handleLogin() {
+        let value = this.formSubmit.value
         if (value) {
           Cache.forever('system:user',value.user)
           localStorage.setItem('system:token',value.token)
@@ -55,7 +59,7 @@
           let redirect = localStorage.getItem('system:login:redirect')
           this.$router.push(redirect)
         }else {
-          this.$store.dispatch('login')
+          this.login()
         }
       },
       /**
